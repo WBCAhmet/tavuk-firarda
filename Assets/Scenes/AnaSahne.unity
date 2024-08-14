@@ -170,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerScoreUI: {fileID: 1615587329}
   mapGenerator: {fileID: 1898613166}
+  player: {fileID: 277803593}
+  cameraHolder: {fileID: 2018340169}
 --- !u!1 &277803589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,6 +1322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 277803592}
   smoothTime: 0.2
+  isCameraFollowingBackwards: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

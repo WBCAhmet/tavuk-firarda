@@ -9,16 +9,31 @@ public class CameraHolder : MonoBehaviour
 
     Vector3 velocity;
 
+    Vector3 velocity2;
+
     public float smoothTime;
+
+    public bool isCameraFollowingBackwards;
 
     private void Update()
     {
-        if (transform.position.z < player.position.z)
+        if (transform.position.z < player.position.z || isCameraFollowingBackwards)
         {
             var targetPos = player.position;
+            targetPos.x = transform.position.x;
             targetPos.y = 0;
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
         }
+
+        if(Mathf.RoundToInt((transform.position - player.position).magnitude)==0)
+        {
+            isCameraFollowingBackwards = false;
+        }
+    }
+
+    public void ResetCameraHolder()
+    {
+        isCameraFollowingBackwards = true;
     }
 }

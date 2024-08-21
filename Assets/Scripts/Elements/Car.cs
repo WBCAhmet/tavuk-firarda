@@ -13,7 +13,7 @@ public class Car : MonoBehaviour
         {
             carModel.SetActive(false);
         }
-        carModels[UnityEngine.Random.Range(0,carModels.Count)].SetActive(true);
+        carModels[UnityEngine.Random.Range(0, carModels.Count)].SetActive(true);
 
         if (toLeft)
         {
@@ -27,11 +27,15 @@ public class Car : MonoBehaviour
             transform.DOMoveX(29f, carTravelDuration).SetEase(Ease.Linear).OnComplete(DestroyCar);
         }
     }
-    
+
     void DestroyCar()
     {
         transform.DOKill();
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        transform.DOKill();
+    }
 }

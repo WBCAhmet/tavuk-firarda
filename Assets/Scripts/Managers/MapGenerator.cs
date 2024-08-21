@@ -5,6 +5,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     public Transform map;
+    public Transform carsParent;
 
     public int mapXLength;
     public int mapZLength;
@@ -24,15 +25,23 @@ public class MapGenerator : MonoBehaviour
 
     public Car carPrefab;
 
-    public Transform carsParent;
+    public List<Coroutine> carCoroutines = new List<Coroutine>();
+
+    public int difficultyScalingRowCount;
+
+    public float minCarGenerationFreq;
+
+    public float minCarTravelDuration;
+
+
 
     public void StartMapGenerator()
     {
-        GenerateMap();
+        AddNewRows(mapZLength);
     }
-    public void GenerateMap()
+    public void AddNewRows(int rowCount)
     {
-        for (int z = 0; z < mapZLength; z++)
+        for (int z = 0; z < rowCount; z++)
         {
             if (z < safeZoneLength)
             {
@@ -43,7 +52,7 @@ public class MapGenerator : MonoBehaviour
                 if (Random.value < .5f)
                 {
                     GenerateAsphaltRow(true);
-                    for (int i = 0; i < Random.Range(1,6); i++)
+                    for (int i = 0; i < Random.Range(1, 6); i++)
                     {
                         GenerateAsphaltRow(false);
                     }
@@ -53,7 +62,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     GenerateGrassRow();
                 }
-            }            
+            }
         }
     }
     public void GenerateAsphaltRow(bool seritGizlensinmi)
@@ -68,22 +77,41 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-        StartCoroutine(GenerateCarCoroutuine(Random.value < .5f, Random.Range(7f,10f), Random.Range(3f, 10f), lastRowCount));
+        var carTravelDuration = Random.Range(7f, 13f) - lastRowCount / difficultyScalingRowCount;
+        var carGenerationFreq = Random.Range(4f, 11f) - lastRowCount / difficultyScalingRowCount;
+
+        carTravelDuration = Mathf.Max(carTravelDuration, minCarTravelDuration - Random.Range(0f,1f));
+        carGenerationFreq = Mathf.Max(carGenerationFreq, minCarGenerationFreq - Random.Range(0f, 1f));
+
+        if(lastRowCount > 20 && Random.value < .2f)
+        {
+            if (Random.value < .5f)
+            {
+                carTravelDuration = Random.Range(12f, 14f);
+                carGenerationFreq = Random.Range(2f, 3f);
+            }
+            else
+            {
+                carTravelDuration = Random.Range(3f, 4f);
+                carGenerationFreq = Random.Range(10f, 11f);
+            }
+        }
+
+        var newCoroutine = StartCoroutine(GenerateCarCoroutine(
+                Random.value < .5f, carTravelDuration, carGenerationFreq, lastRowCount));
+        carCoroutines.Add(newCoroutine);
 
         lastRowCount += 1;
     }
-
-    IEnumerator GenerateCarCoroutuine(bool toLeft, float carTravelDuration, float carGenerationFreq, int row)
+    IEnumerator GenerateCarCoroutine(bool toLeft, float carTravelDuration, float carGenerationFreq, int row)
     {
         while (true)
         {
-            var newCar = Instantiate(carPrefab,carsParent);
+            var newCar = Instantiate(carPrefab, carsParent);
             newCar.StartCar(row, toLeft, carTravelDuration);
             yield return new WaitForSeconds(carGenerationFreq);
         }
     }
-
-
     public void GenerateGrassRow()
     {
         for (int i = 0; i < mapXLength; i++)
@@ -100,5 +128,23 @@ public class MapGenerator : MonoBehaviour
             }
         }
         lastRowCount += 1;
+    }
+
+    public void DeleteMap()
+    {
+        foreach (Transform t in map)
+        {
+            Destroy(t.gameObject);
+        }
+        foreach (Transform t in carsParent)
+        {
+            Destroy(t.gameObject);
+        }
+        foreach (Coroutine c in carCoroutines)
+        {
+            StopCoroutine(c);
+        }
+        carCoroutines.Clear();
+        lastRowCount = 0;
     }
 }

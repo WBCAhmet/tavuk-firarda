@@ -5,43 +5,42 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
-    public PlayerScoreUI playerScoreUI;
-
+    [Header("Managers")]
     public MapGenerator mapGenerator;
 
-    public Player player;
+    [Header("UI")]
+    public PlayerScoreUI playerScoreUI;
+    public FailUI failUI;
 
+    [Header("Elements")]
+    public Player player;
     public CameraHolder cameraHolder;
 
     // Start is called before the first frame update
     void Start()
     {
-        mapGenerator.StartMapGenerator();
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R)) {
-            RestartLevel();
-        }
-    }
-
-    private void RestartLevel()
-    {
-        // Player Position ResetLe
-        player.ResetPlayer();
-        // Kameranýn pozisyonunu resetle
-        cameraHolder.ResetCameraHolder();
-        // Haritayý Sil
-        // Haritayý Yeniden Oluþtur
-        // Player Skorunu 0la
-        
-
-
+        RestartLevel();
     }
 
     public void UpdatePlayerScore(int playerScore)
     {
         playerScoreUI.UpdatePlayerScore(playerScore);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RestartLevel();
+        }
+    }
+
+    public void RestartLevel()
+    {
+        failUI.RestartFailUI();
+        player.ResetPlayer();
+        cameraHolder.ResetCameraHolder();
+        mapGenerator.DeleteMap();
+        mapGenerator.AddNewRows(mapGenerator.mapZLength);
     }
 }

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,6 +95,18 @@ public class Player : MonoBehaviour
         {
             PlayerFailed();
         }
+        if (other.CompareTag("Coin"))
+        {
+            CollectCoin(); 
+            other.gameObject.SetActive(false);
+        }
+    }
+
+    private void CollectCoin()
+    {
+        gameDirector.coinManager.EarnCoins(1);
+        print(gameDirector.coinManager.GetCoinCount());
+
     }
 
     private void PlayerFailed()
@@ -196,6 +209,7 @@ public class Player : MonoBehaviour
         if(gameDirector.mapGenerator.lastRowCount - transform.position.z <= 20)
         {
             gameDirector.mapGenerator.AddNewRows(10);
+            gameDirector.DeleteRow(10);
         }
     }
     private void DoJumpAnimation()

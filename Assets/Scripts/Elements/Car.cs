@@ -7,6 +7,7 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     public List<GameObject> carModels;
+
     public void StartCar(int row, bool toLeft, float carTravelDuration)
     {
         foreach (GameObject carModel in carModels)

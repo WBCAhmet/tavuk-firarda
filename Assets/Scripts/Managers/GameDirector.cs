@@ -8,6 +8,7 @@ public class GameDirector : MonoBehaviour
     [Header("Managers")]
     public MapGenerator mapGenerator;
     public CoinManager coinManager;
+    public AudioManager audioManager;
 
     [Header("UI")]
     public PlayerScoreUI playerScoreUI;
@@ -67,5 +68,6 @@ public class GameDirector : MonoBehaviour
         cameraHolder.ResetCameraHolder();
         mapGenerator.DeleteMap();
         mapGenerator.AddNewRows(mapGenerator.mapZLength);
+        audioManager.PlayBackgroundSound();
     }
 }

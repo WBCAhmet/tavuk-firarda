@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -106,7 +107,7 @@ public class Player : MonoBehaviour
     {
         gameDirector.coinManager.EarnCoins(1);
         print(gameDirector.coinManager.GetCoinCount());
-
+        gameDirector.audioManager.PlayPositiveSound();
     }
 
     private void PlayerFailed()
@@ -119,6 +120,7 @@ public class Player : MonoBehaviour
         transform.DOScaleZ(1.1f, .1f);
         transform.DOMoveY(0, .1f);
         gameDirector.failUI.Show();
+        gameDirector.audioManager.PlayDeathSound();
     }
     void MoveCharacter(Vector3 direction)
     {
@@ -218,5 +220,6 @@ public class Player : MonoBehaviour
         transform.DOScaleY(1f, karakterHareketSuresi * .5f).SetLoops(2, LoopType.Yoyo);
         transform.DOScaleX(.3f, karakterHareketSuresi * .5f).SetLoops(2, LoopType.Yoyo);
         transform.DOScaleZ(.3f, karakterHareketSuresi * .5f).SetLoops(2, LoopType.Yoyo);
+        gameDirector.audioManager.PlayJumpSound();
     }
 }

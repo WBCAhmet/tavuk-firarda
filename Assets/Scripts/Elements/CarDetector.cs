@@ -19,7 +19,13 @@ public class CarDetector : MonoBehaviour
     {
         if (other.gameObject.tag == "Car")
         {
-            player.gameDirector.audioManager.PlayCarSound();
+            var car = other.GetComponent<Car>();
+            if ((car.isCarDirectionLeft && transform.position.x < other.transform.position.x) 
+                || (!car.isCarDirectionLeft && transform.position.x > other.transform.position.x))
+            {
+                player.gameDirector.audioManager.PlayCarSound();
+
+            }
         }
     }
 }

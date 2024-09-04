@@ -7,6 +7,7 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     public List<GameObject> carModels;
+    public bool isCarDirectionLeft;
 
     public void StartCar(int row, bool toLeft, float carTravelDuration)
     {
@@ -27,6 +28,7 @@ public class Car : MonoBehaviour
             transform.position = new Vector3(0, 0, row);
             transform.DOMoveX(29f, carTravelDuration).SetEase(Ease.Linear).OnComplete(DestroyCar);
         }
+        isCarDirectionLeft = toLeft;
     }
 
     void DestroyCar()

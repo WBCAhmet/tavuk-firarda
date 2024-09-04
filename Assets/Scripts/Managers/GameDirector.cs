@@ -13,6 +13,7 @@ public class GameDirector : MonoBehaviour
     [Header("UI")]
     public PlayerScoreUI playerScoreUI;
     public FailUI failUI;
+    public CoinUI coinUI;
 
     [Header("Elements")]
     public Player player;
@@ -43,7 +44,7 @@ public class GameDirector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
         {
             coinManager.ResetCoinCount();
-            print(coinManager.GetCoinCount());
+            coinUI.updateCoinCount();
         }
     }
 
@@ -69,5 +70,7 @@ public class GameDirector : MonoBehaviour
         mapGenerator.DeleteMap();
         mapGenerator.AddNewRows(mapGenerator.mapZLength);
         audioManager.PlayBackgroundSound();
+        coinUI.Show();
+        coinUI.updateCoinCount();
     }
 }

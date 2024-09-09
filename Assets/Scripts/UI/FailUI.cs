@@ -38,6 +38,7 @@ public class FailUI : MonoBehaviour
 
     public void RestartButtonClicked()
     {
-        gameDirector.RestartLevel();
+        gameDirector.mainMenu.Show();
+        Hide();
     }
 }

@@ -8,17 +8,16 @@ public class CoinUI : MonoBehaviour
 {
     private CanvasGroup _canvasGroup;
     public TextMeshProUGUI coinTMP;
-    private void Start()
-    {
-        _canvasGroup = GetComponent<CanvasGroup>();
-    }
+    
     public void Show()
     {
+        _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.DOFade(1, .2f);
     }
 
     public void Hide()
     {
+        _canvasGroup = GetComponent<CanvasGroup>();
         _canvasGroup.DOFade(0, .2f);
     }
 

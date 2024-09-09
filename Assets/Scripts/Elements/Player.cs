@@ -102,13 +102,14 @@ public class Player : MonoBehaviour
         {
             CollectCoin(); 
             other.gameObject.SetActive(false);
+            gameDirector.audioManager.PlayPositiveSound();
+            gameDirector.fxManager.PlayCoinCollectParticles(other.transform.position);
         }
     }
 
     private void CollectCoin()
     {
         gameDirector.coinManager.EarnCoins(1);
-        gameDirector.audioManager.PlayPositiveSound();
         gameDirector.coinUI.updateCoinCount();
     }
 

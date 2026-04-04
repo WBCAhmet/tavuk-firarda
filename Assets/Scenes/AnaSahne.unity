@@ -403,7 +403,7 @@ MonoBehaviour:
   gameDirector: {fileID: 11406411}
   mainCamera: {fileID: 330585545}
   karakterHareketEdiyorMu: 0
-  karakterOyunuKaybettiMi: 0
+  areControlsLocked: 0
   karakterHareketSuresi: 0.1
   layerMask:
     serializedVersion: 2
@@ -547,13 +547,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4126005, y: -0.19616082, z: 0.091471285, w: 0.88482475}
-  m_LocalPosition: {x: 2, y: 8.5, z: -3.5}
+  m_LocalRotation: {x: 0.4649301, y: 0.027991017, z: -0.017527519, w: 0.8847312}
+  m_LocalPosition: {x: 0.00000022351742, y: 8.5, z: -3.5000074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2018340168}
-  m_LocalEulerAnglesHint: {x: 50, y: -25, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.453, y: 3.359, z: -0.504}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0

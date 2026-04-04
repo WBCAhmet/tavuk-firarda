@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public Camera mainCamera;
 
     public bool karakterHareketEdiyorMu;
-    public bool karakterOyunuKaybettiMi;
+    public bool areControlsLocked;
     public float karakterHareketSuresi;
 
     private Vector3 _dokunmaNoktasi;
@@ -40,12 +40,12 @@ public class Player : MonoBehaviour
     private void HareketKilitleriniKaldir()
     {
         karakterHareketEdiyorMu = false;
-        karakterOyunuKaybettiMi = false;
+        areControlsLocked = false;
     }
 
     private void Update()
     {
-        if (karakterOyunuKaybettiMi || karakterHareketEdiyorMu)
+        if (areControlsLocked || karakterHareketEdiyorMu)
         {
             return;
         }
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
 
     private void PlayerFailed()
     {
-        karakterOyunuKaybettiMi = true;
+        areControlsLocked = true;
         GetComponent<BoxCollider>().enabled = false;
         transform.DOKill();
         transform.DOScaleY(.01f, .1f);

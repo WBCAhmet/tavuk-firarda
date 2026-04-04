@@ -26,6 +26,7 @@ public class GameDirector : MonoBehaviour
     {
         mainMenu.RestartMainMenu();
         mainMenu.Show();
+        player.areControlsLocked = true;
         //RestartLevel();
     }
 

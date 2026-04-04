@@ -922,11 +922,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 7ca8944d-f237-49e8-baf3-20e96997753e
+  cloudProjectId: 381e99d4-bee5-4284-8a6c-e9dfc3f09d24
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: KuzemEgitim
-  organizationId: g-k-e-g-n
+  projectName: tavukFirarda
+  organizationId: ahmetakkus42
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
